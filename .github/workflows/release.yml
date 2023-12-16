@@ -1,0 +1,64 @@
+name: Release Plugin
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      
+      - name: Get Plugin Name
+        id: plugin-name
+        run: |
+          read -r -d '' SCRIPT <<EOF
+          <?php
+          \$tokens = token_get_all(file_get_contents('./plugin/Plugin.php'));
+          \$announced = false;
+          \$namespace = '';
+          foreach (\$tokens as \$token) {
+              if (!is_array(\$token)) {
+                  continue;
+              }
+              if (!\$announced && \$token[0] === T_NAMESPACE) {
+                  \$announced = true;
+                  continue;
+              } elseif (\$announced && \$token[0] === T_NAME_QUALIFIED) {
+                  \$namespace = \$token[1];
+                  break;
+              }
+          }
+          if (empty(\$namespace)) {
+              echo 'Cannot find namespace in Plugin.php';
+              exit(1);
+          }
+          \$names = explode('\\\\\\', \$namespace);
+          echo array_pop(\$names);
+          EOF
+          echo plugin_name=$(echo $SCRIPT | php) >> $GITHUB_OUTPUT
+
+      - name: Zip Plugin
+        id: zip-plugin
+        run: |
+          sed -i "s/%version%/${{ github.event.release.tag_name }}/g" $GITHUB_WORKSPACE/plugin/Plugin.php
+          cd $GITHUB_WORKSPACE/plugin
+          zip -q -r $GITHUB_WORKSPACE/${{ steps.plugin-name.outputs.plugin_name }}.zip *
+          echo plugin_zip=${{ steps.plugin-name.outputs.plugin_name }}.zip >> $GITHUB_OUTPUT
+
+      - name: Upload Plugin To Releases
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ${{ steps.zip-plugin.outputs.plugin_zip }}
+          asset_name: ${{ steps.zip-plugin.outputs.plugin_zip }}
+          asset_content_type: application/zip
