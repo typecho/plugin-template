@@ -49,6 +49,18 @@ Important notes:
 - The namespace of the plugin should be `TypechoPlugin\{PluginName}`. For example, if the plugin name is `Example`, the namespace should be `TypechoPlugin\Example`. This is required for the plugin to be loaded by Typecho.
 - The version of the plugin should be replaced with `%version%`. The version number will be replaced by the build script automatically. **Do not** replace the version number manually.
 
+Naming rules:
+
+- The plugin name should contain only letters, numbers.
+- The plugin name should be in PascalCase.
+
+Examples:
+
+- `Example` is a valid plugin name.
+- `ExamplePlugin` is a valid plugin name.
+- `Example-Plugin` is not a valid plugin name.
+- `Example_Plugin` is not a valid plugin name.
+
 ## Release Steps
 
 Create a release on GitHub and name a tag with the version number. For example, if the version number is `1.0.0`, the tag name should be `1.0.0`.
