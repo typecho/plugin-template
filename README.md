@@ -1,4 +1,4 @@
-# Typecho 插件模板
+# Typecho Plugin Template
 
 This is a template for developing Typecho plugins.
 
