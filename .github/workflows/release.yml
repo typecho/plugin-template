@@ -1,10 +1,29 @@
 name: Release Plugin
 
 on:
+  create:
   release:
     types: [published]
 
 jobs:
+  setup:
+    if: github.run_number == 1 && github.event_name == 'create'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Initialize
+        run: |
+          rm -rf LICENSE
+          rm -rf README.*
+          echo "# ${{ github.event.repository.name }}" > README.md
+
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "Setup project for ${{ github.event.repository.name }}"
+
   release:
     runs-on: ubuntu-latest
     permissions:
