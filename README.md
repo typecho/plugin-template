@@ -1,6 +1,12 @@
-# Typecho Plugin Template
+# Typecho 插件模板
 
 This is a template for developing Typecho plugins.
+
+[中文说明](README.zh-CN.md)
+
+## How to Use
+
+Click the "Use this template" button to create a new repository from this template.
 
 ## Suggested Directory Structure
 
@@ -45,4 +51,6 @@ Important notes:
 
 ## Release Steps
 
-Create a release on GitHub and
+Create a release on GitHub and name a tag with the version number. For example, if the version number is `1.0.0`, the tag name should be `1.0.0`.
+
+The build script will automatically create a zip file for the release and upload it to the release page.
