@@ -63,6 +63,6 @@ Examples:
 
 ## Release Steps
 
-Create a release on GitHub and name a tag with the version number. For example, if the version number is `1.0.0`, the tag name should be `1.0.0`.
+Create a release on GitHub and name a tag with the version number. For example, if the version number is `1.0.0`, the tag name should be `1.0.0` or `v1.0.0`.
 
 The build script will automatically create a zip file for the release and upload it to the release page.
