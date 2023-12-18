@@ -88,7 +88,7 @@ class Plugin implements PluginInterface
 则可以使用以下命令将插件目录链接到 Typecho 的插件目录：
 
 ```bash
-ln -s /path/to/plugin /path/to/typecho/usr/plugins/Example
+ln -s /path/to/plugin/plugin /path/to/typecho/usr/plugins/Example
 ```
 
 然后，就可以在 `/path/to/plugin` 目录下开发插件了。这里的插件目录名 `Example` 应该与 Typecho 的插件名相同。
