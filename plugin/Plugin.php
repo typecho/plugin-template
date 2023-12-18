@@ -3,6 +3,7 @@
 namespace TypechoPlugin\Example;
 
 use Typecho\Plugin\PluginInterface;
+use Typecho\Widget\Helper\Form;
 
 if (!defined('__TYPECHO_ROOT_DIR__')) {
     exit;
