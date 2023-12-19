@@ -1,5 +1,6 @@
 <?php
 
+// TODO: Replace the namespace 'Example' to your plugin name.
 namespace TypechoPlugin\Example;
 
 use Typecho\Plugin\PluginInterface;
@@ -10,12 +11,12 @@ if (!defined('__TYPECHO_ROOT_DIR__')) {
 }
 
 /**
- * Example plugin.
+ * %description%
  *
- * @package Example
- * @author Typecho
+ * @package %name%
+ * @author %author%
  * @version %version%
- * @link https://typecho.org
+ * @link %link%
  */
 class Plugin implements PluginInterface
 {
