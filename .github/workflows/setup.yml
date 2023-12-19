@@ -19,7 +19,7 @@ jobs:
           rm -rf .github/workflows/setup.yml
           echo "# ${{ github.event.repository.name }}" > README.md
           sed -i "s/%author%/${{ github.repository_owner }}/g" ./plugin/Plugin.php
-          sed -i "s/%link%/${{ github.event.repository.html_url }}/g" ./plugin/Plugin.php
+          sed -i "s|%link%|${{ github.event.repository.html_url }}|g" ./plugin/Plugin.php
           sed -i "s/%name%/${{ github.event.repository.name }}/g" ./plugin/Plugin.php
           sed -i "s/%description%/${{ github.event.description }}/g" ./plugin/Plugin.php
 
